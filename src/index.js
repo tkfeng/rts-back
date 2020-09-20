@@ -1,4 +1,7 @@
-import 'dotenv/config';
-
-console.log('Hello ever running Node.js Project.');
-console.log(process.env.ENVIRONMENT);
+import express from 'express';
+ 
+const app = express();
+ 
+app.listen(3000, () =>
+  console.log('Example app listening on port 3000!'),
+);
