@@ -37,6 +37,15 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   return res.send('Received a GET HTTP method');
 });
+
+app.use((req, res, next) => {
+  req.me = users[1];
+  next();
+});
+
+app.get('/session', (req, res) => {
+  return res.send(users[req.me.id]);
+});
  
 app.get('/users', (req, res) => {
   return res.send(Object.values(users));
@@ -59,9 +68,21 @@ app.post('/messages', (req, res) => {
   const message = {
     id,
     text: req.body.text,
+    userId: req.me.id,
   };
  
   messages[id] = message;
+ 
+  return res.send(message);
+});
+
+app.delete('/messages/:messageId', (req, res) => {
+  const {
+    [req.params.messageId]: message,
+    ...otherMessages
+  } = messages;
+ 
+  messages = otherMessages;
  
   return res.send(message);
 });
