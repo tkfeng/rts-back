@@ -11,7 +11,7 @@ const user = (sequelize, DataTypes) => {
     });
 
     User.associate = models => {
-      User.hasMany(models.Message, { onDelete: 'CASCADE' });
+      User.hasMany(models.get('Message'), { onDelete: 'CASCADE' });
     };
 
     // Find user via username or email.

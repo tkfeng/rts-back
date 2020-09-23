@@ -3,12 +3,12 @@ import { Router } from 'express';
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const users = await req.context.models.User.findAll();
+  const users = await req.context.models.get('User').findAll();
   return res.send(users);
 });
  
 router.get('/:userId', async (req, res) => {
-  const user = await req.context.models.User.findByPk(
+  const user = await req.context.models.get('User').findByPk(
     req.params.userId,
   );
   return res.send(user);

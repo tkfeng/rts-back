@@ -4,19 +4,19 @@ import { Router } from 'express';
 const router = Router();
  
 router.get('/', async (req, res) => {
-  const messages = await req.context.models.Message.findAll();
+  const messages = await req.context.models.get('Message').findAll();
   return res.send(messages);
 });
  
 router.get('/:messageId', async (req, res) => {
-  const message = await req.context.models.Message.findByPk(
+  const message = await req.context.models.get('Message').findByPk(
     req.params.messageId,
   );
   return res.send(message);
 });
  
 router.post('/', async (req, res) => {
-  const message = await req.context.models.Message.create({
+  const message = await req.context.models.get('Message').create({
     text: req.body.text,
     userId: req.context.me.id,
   });
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 });
  
 router.delete('/:messageId', async (req, res) => {
-  const result = await req.context.models.Message.destroy({
+  const result = await req.context.models.get('Message').destroy({
     where: { id: req.params.messageId },
   });
  

@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 app.use(async (req, res, next) => {
   req.context = {
     models,
-    me: await models.User.findByLogin('rwieruch'),
+    me: await models.get('User').findByLogin('rwieruch'),
   };
   next();
 });
@@ -39,7 +39,7 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(() => {
 });
 
 const createUsersWithMessages = async () => {
-  await models.User.create(
+  await models.get('User').create(
     {
       username: 'rwieruch',
       messages: [
@@ -49,11 +49,11 @@ const createUsersWithMessages = async () => {
       ],
     },
     {
-      include: [models.Message],
+      include: [models.get('Message')],
     },
   );
 
-  await models.User.create(
+  await models.get('User').create(
     {
       username: 'ddavids',
       messages: [
@@ -66,7 +66,7 @@ const createUsersWithMessages = async () => {
       ],
     },
     {
-      include: [models.Message],
+      include: [models.get('Message')],
     },
   );
   console.log(`\n===Seeding complete!===`);
