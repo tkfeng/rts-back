@@ -1,16 +1,19 @@
 import { Router } from 'express';
+export { selectUserModel, selectUserAll, selectUserById } from './selectors';
  
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const users = await req.context.models.get('User').findAll();
+  const users = await selectUserAll(req.context.models);
   return res.send(users);
 });
  
 router.get('/:userId', async (req, res) => {
-  const user = await req.context.models.get('User').findByPk(
+  const user = await selectUserById(
+    req.context.models,
     req.params.userId,
   );
+
   return res.send(user);
 });
  

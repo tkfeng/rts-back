@@ -10,9 +10,6 @@ const sequelize = new Sequelize(
     dialect: 'postgres',
   },
 );
-
-const User = user(sequelize, DataTypes);
-const Message = message(sequelize, DataTypes);
  
 const models = new Map([
   ["User", user(sequelize, DataTypes)],
@@ -25,12 +22,6 @@ for (let key of models.keys()) {
     model.associate(models);
   }
 }
- 
-// Object.keys(models).forEach(key => {
-//   if ('associate' in models[key]) {
-//     models[key].associate(models);
-//   }
-// });
  
 export { sequelize };
  

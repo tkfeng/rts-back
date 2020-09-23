@@ -1,22 +1,24 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Router } from 'express';
+import {selectMessageModel, selectMessageAll, selectMessageById} from './selectors';
  
 const router = Router();
  
 router.get('/', async (req, res) => {
-  const messages = await req.context.models.get('Message').findAll();
+  const messages = await selectMessageAll(req.context.models);
   return res.send(messages);
 });
  
 router.get('/:messageId', async (req, res) => {
-  const message = await req.context.models.get('Message').findByPk(
+  const message = await selectMessageById(
+    req.context.models,
     req.params.messageId,
   );
   return res.send(message);
 });
  
 router.post('/', async (req, res) => {
-  const message = await req.context.models.get('Message').create({
+  const message = await selectMessageModel(req.context.models).create({
     text: req.body.text,
     userId: req.context.me.id,
   });
@@ -25,7 +27,7 @@ router.post('/', async (req, res) => {
 });
  
 router.delete('/:messageId', async (req, res) => {
-  const result = await req.context.models.get('Message').destroy({
+  const result = await selectMessageModel(req.context.models).destroy({
     where: { id: req.params.messageId },
   });
  
