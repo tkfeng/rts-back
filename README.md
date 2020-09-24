@@ -1,4 +1,12 @@
-# tutrw-back
+# rts-back
+Backend for Reach-the-Sheep
+
+## Setup
+
+Starting the local server.
+```
+npm start
+```
 
 Starting and stopping postgres on commend line.
 ```
