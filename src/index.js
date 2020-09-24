@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import routes from './routes';
 import models, { sequelize } from './models';
+import createMockData from './utils/createMockData';
 
 const app = express();
 
@@ -11,9 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  return res.send('Received a GET HTTP method');
-});
+app.get('/', (req, res) => res.send('Received a GET HTTP method'));
 
 app.use(async (req, res, next) => {
   req.context = {
@@ -27,19 +26,21 @@ app.use('/session', routes.session);
 app.use('/users', routes.user);
 app.use('/messages', routes.message);
 
-app.get('*', function (req, res, next) {
+app.get('*', (req, res, next) => {
   const error = new Error(
     `${req.ip} tried to access ${req.originalUrl}`,
   );
- 
+
   error.statusCode = 301;
- 
+
   next(error);
 });
 
+// eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {
+  // eslint-disable-next-line no-param-reassign
   if (!error.statusCode) error.statusCode = 500;
- 
+
   if (error.statusCode === 301) {
     return res.status(301).redirect('/not-found');
   }
@@ -53,43 +54,7 @@ const eraseDatabaseOnSync = true;
 
 sequelize.sync({ force: eraseDatabaseOnSync }).then(() => {
   if (eraseDatabaseOnSync) {
-    createUsersWithMessages();
+    createMockData(models);
   }
-  app.listen(process.env.PORT, () =>
-    console.log(`\n===Example app listening on port ${process.env.PORT}!===`),
-  );
+  app.listen(process.env.PORT, () => console.log(`\n===Example app listening on port ${process.env.PORT}!===`));
 });
-
-const createUsersWithMessages = async () => {
-  await models.get('User').create(
-    {
-      username: 'rwieruch',
-      messages: [
-        {
-          text: 'Published the Road to learn React',
-        },
-      ],
-    },
-    {
-      include: [models.get('Message')],
-    },
-  );
-
-  await models.get('User').create(
-    {
-      username: 'ddavids',
-      messages: [
-        {
-          text: 'Happy to release ...',
-        },
-        {
-          text: 'Published a complete ...',
-        },
-      ],
-    },
-    {
-      include: [models.get('Message')],
-    },
-  );
-  console.log(`\n===Seeding complete!===`);
-};

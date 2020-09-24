@@ -1,9 +1,10 @@
-export const selectUserModel = (models) => {
-  return models.get('User');
-};
+export const selectUserModel = (models) => models.get('User');
 export const selectUserAll = async (models) => {
-  return await selectUserModel(models).findAll();
+  const result = await selectUserModel(models).findAll();
+  return result;
 };
+
 export const selectUserById = async (models, userId) => {
-  return await selectUserModel(models).findByPk(userId);
+  const result = await selectUserModel(models).findByPk(userId);
+  return result;
 };

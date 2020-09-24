@@ -1,9 +1,11 @@
-export const selectMessageModel = (models) => {
-  return models.get('Message');
-};
+export const selectMessageModel = (models) => models.get('Message');
+
 export const selectMessageAll = async (models) => {
-  return await selectMessageModel(models).findAll();
+  const result = await selectMessageModel(models).findAll();
+  return result;
 };
+
 export const selectMessageById = async (models, messageId) => {
-  return await selectMessageModel(models).findByPk(messageId);
+  const result = await selectMessageModel(models).findByPk(messageId);
+  return result;
 };

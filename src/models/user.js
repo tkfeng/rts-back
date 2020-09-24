@@ -1,35 +1,35 @@
 const user = (sequelize, DataTypes) => {
-    const User = sequelize.define('user', {
-      username: {
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
+  const User = sequelize.define('user', {
+    username: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
       },
+    },
+  });
+
+  User.associate = (models) => {
+    User.hasMany(models.get('Message'), { onDelete: 'CASCADE' });
+  };
+
+  // Find user via username or email.
+  User.findByLogin = async (login) => {
+    let result = await User.findOne({
+      where: { username: login },
     });
 
-    User.associate = models => {
-      User.hasMany(models.get('Message'), { onDelete: 'CASCADE' });
-    };
-
-    // Find user via username or email.
-    User.findByLogin = async login => {
-      let user = await User.findOne({
-        where: { username: login },
+    if (!user) {
+      result = await User.findOne({
+        where: { email: login },
       });
-    
-      if (!user) {
-        user = await User.findOne({
-          where: { email: login },
-        });
-      }
-    
-      return user;
-    };  
-   
-    return User;
+    }
+
+    return result;
   };
-   
-  export default user;
+
+  return User;
+};
+
+export default user;

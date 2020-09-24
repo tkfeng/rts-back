@@ -6,14 +6,14 @@ const message = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true,
       },
-    }
+    },
   });
- 
-  Message.associate = models => {
+
+  Message.associate = (models) => {
     Message.belongsTo(models.get('User'));
   };
- 
+
   return Message;
 };
- 
+
 export default message;
