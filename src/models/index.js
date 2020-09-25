@@ -1,6 +1,7 @@
 import Sequelize, { DataTypes } from 'sequelize';
 import board from './board';
 import nodeType from './nodeType';
+import node from './node';
 
 const sequelize = new Sequelize(
   process.env.DATABASE,
@@ -14,6 +15,7 @@ const sequelize = new Sequelize(
 const models = new Map([
   ['Board', board(sequelize, DataTypes)],
   ['NodeType', nodeType(sequelize, DataTypes)],
+  ['Node', node(sequelize, DataTypes)],
 ]);
 
 models.forEach((model) => {

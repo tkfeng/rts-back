@@ -11,7 +11,7 @@ const board = (sequelize, DataTypes) => {
     display: {
       type: DataTypes.STRING,
     },
-  });
+  }, { underscored: true });
 
   return Board;
 };
