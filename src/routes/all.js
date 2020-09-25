@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import {
   selectBoardAll,
-  selectBoardById,
-} from '../../selectors';
+  selectNodeTypeAll,
+} from '../selectors';
 
 const router = Router();
 
@@ -10,16 +10,9 @@ router.get('/', async (req, res) => {
   const { models } = req.context;
   const result = {
     board: await selectBoardAll(models),
+    nodeType: await selectNodeTypeAll(models),
   };
 
-  return res.send(result);
-});
-
-router.get('/:boardId', async (req, res) => {
-  const result = await selectBoardById(
-    req.context.models,
-    req.params.boardId,
-  );
   return res.send(result);
 });
 

@@ -21,6 +21,7 @@ app.use(async (req, res, next) => {
   next();
 });
 
+app.use('/all', routes.all);
 app.use('/boards', routes.board);
 
 app.get('*', (req, res, next) => {
