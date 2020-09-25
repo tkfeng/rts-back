@@ -5,8 +5,9 @@ const router = Router();
 const selectBoard = (models) => models.get('Board');
 
 const selectBoardAll = async (models) => {
-  const result = await selectBoard(models).findAll();
-  return result;
+  const boards = await selectBoard(models).findAll();
+  const nodeTypes = await models.get('NodeType').findAll();
+  return { boards, nodeTypes };
 };
 
 const selectBoardById = async (models, boardId) => {
