@@ -17,14 +17,11 @@ app.get('/', (req, res) => res.send('Received a GET HTTP method'));
 app.use(async (req, res, next) => {
   req.context = {
     models,
-    me: await models.get('User').findByLogin('rwieruch'),
   };
   next();
 });
 
-app.use('/session', routes.session);
-app.use('/users', routes.user);
-app.use('/messages', routes.message);
+app.use('/boards', routes.board);
 
 app.get('*', (req, res, next) => {
   const error = new Error(
@@ -56,5 +53,7 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(() => {
   if (eraseDatabaseOnSync) {
     createMockData(models);
   }
-  app.listen(process.env.PORT, () => console.log(`\n===Example app listening on port ${process.env.PORT}!===`));
+  app.listen(process.env.PORT, () => {
+    console.log(`\n===RTS listening on port ${process.env.PORT}!===`);
+  });
 });

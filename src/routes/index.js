@@ -1,9 +1,5 @@
-import session from './session';
-import user from './user';
-import message from './message';
+import board from './board';
 
 export default {
-  session,
-  user,
-  message,
+  board,
 };

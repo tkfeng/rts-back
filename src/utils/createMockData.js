@@ -1,33 +1,29 @@
 export default async (models) => {
-  await models.get('User').create(
+  await models.get('Board').create(
     {
-      username: 'rwieruch',
-      messages: [
-        {
-          text: 'Published the Road to learn React',
-        },
-      ],
-    },
-    {
-      include: [models.get('Message')],
+      board_name: 'b1',
+      display: 'First ever Reach The Sheep board.',
     },
   );
+  await models.get('Board').create(
+    {
+      board_name: 'b2',
+      display: 'Second Reach The Sheep board.',
+    },
+  );
+  // await models.get('User').create(
+  //   {
+  //     username: 'rwieruch',
+  //     messages: [
+  //       {
+  //         text: 'Published the Road to learn React',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     include: [models.get('Message')],
+  //   },
+  // );
 
-  await models.get('User').create(
-    {
-      username: 'ddavids',
-      messages: [
-        {
-          text: 'Happy to release ...',
-        },
-        {
-          text: 'Published a complete ...',
-        },
-      ],
-    },
-    {
-      include: [models.get('Message')],
-    },
-  );
   console.log('\n===Seeding complete!===');
 };

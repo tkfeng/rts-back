@@ -1,5 +1,6 @@
 import Sequelize, { DataTypes } from 'sequelize';
-import board from './board';
+import user from './user';
+import message from './message';
 
 const sequelize = new Sequelize(
   process.env.DATABASE,
@@ -11,7 +12,8 @@ const sequelize = new Sequelize(
 );
 
 const models = new Map([
-  ['Board', board(sequelize, DataTypes)],
+  ['User', user(sequelize, DataTypes)],
+  ['Message', message(sequelize, DataTypes)],
 ]);
 
 models.forEach((model) => {

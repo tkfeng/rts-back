@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { selectMessageModel, selectMessageAll, selectMessageById } from './selectors';
-import BadRequestError from '../../utils/errors';
+import BadRequestError from '../../../utils/errors';
 
 const router = Router();
 
