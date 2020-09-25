@@ -1,3 +1,5 @@
+import { selectNode } from '../selectors';
+
 const board = (sequelize, DataTypes) => {
   const Board = sequelize.define('board', {
     board_name: {
@@ -13,6 +15,9 @@ const board = (sequelize, DataTypes) => {
     },
   }, { underscored: true });
 
+  Board.associate = (models) => {
+    Board.hasMany(selectNode(models));
+  };
   return Board;
 };
 

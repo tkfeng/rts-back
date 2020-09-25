@@ -1,5 +1,6 @@
 import {
   selectBoard,
+  selectNode,
   selectNodeType,
 } from '../selectors';
 
@@ -32,10 +33,11 @@ export default async (models) => {
     },
   );
 
-  await models.get('Node').create({
+  await selectNode(models).create({
     node_name: 'n2',
     display: 'Second node',
     node_type_id: 1,
+    board_id: 1,
   });
   // await models.get('User').create(
   //   {

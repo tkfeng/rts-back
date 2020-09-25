@@ -1,3 +1,5 @@
+import { selectNode } from '../selectors';
+
 const nodeType = (sequelize, DataTypes) => {
   const NodeType = sequelize.define('node_type', {
     node_type_name: {
@@ -12,6 +14,10 @@ const nodeType = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   }, { underscored: true });
+
+  NodeType.associate = (models) => {
+    NodeType.hasMany(selectNode(models));
+  };
 
   return NodeType;
 };
