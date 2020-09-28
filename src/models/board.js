@@ -1,7 +1,9 @@
+import { DataTypes } from 'sequelize';
 import { selectNode } from '../selectors';
 
-const board = (sequelize, DataTypes) => {
+const board = (sequelize) => {
   const Board = sequelize.define('board', {
+    // UUID board and nodetypes and update foriegn key to boardName
     boardName: {
       type: DataTypes.STRING,
       unique: true,

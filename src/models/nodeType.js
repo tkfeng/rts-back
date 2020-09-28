@@ -1,6 +1,7 @@
+import { DataTypes } from 'sequelize';
 import { selectNode } from '../selectors';
 
-const nodeType = (sequelize, DataTypes) => {
+const nodeType = (sequelize) => {
   const NodeType = sequelize.define('node_type', {
     nodeTypeName: {
       type: DataTypes.STRING,

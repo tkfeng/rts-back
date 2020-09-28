@@ -1,4 +1,4 @@
-import Sequelize, { DataTypes } from 'sequelize';
+import Sequelize from 'sequelize';
 import board from './board';
 import nodeType from './nodeType';
 import node from './node';
@@ -13,9 +13,9 @@ const sequelize = new Sequelize(
 );
 
 const models = new Map([
-  ['Board', board(sequelize, DataTypes)],
-  ['NodeType', nodeType(sequelize, DataTypes)],
-  ['Node', node(sequelize, DataTypes)],
+  ['Board', board(sequelize)],
+  ['NodeType', nodeType(sequelize)],
+  ['Node', node(sequelize)],
 ]);
 
 models.forEach((model) => {

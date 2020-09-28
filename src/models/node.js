@@ -1,7 +1,14 @@
+import { DataTypes } from 'sequelize';
 import { selectBoard, selectNodeType } from '../selectors';
 
-const node = (sequelize, DataTypes) => {
+const node = (sequelize) => {
   const Node = sequelize.define('node', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     nodeName: {
       type: DataTypes.STRING,
       unique: true,
