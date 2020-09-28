@@ -14,7 +14,7 @@ const node = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   }, {
-    // underscored: true
+    timestamps: false,
   });
 
   Node.associate = (models) => {
