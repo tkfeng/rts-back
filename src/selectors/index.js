@@ -5,6 +5,12 @@ export {
 } from './board';
 
 export {
+  selectEdge,
+  selectEdgeAll,
+  selectEdgeById,
+} from './edge';
+
+export {
   selectNode,
   selectNodeAll,
   selectNodeById,

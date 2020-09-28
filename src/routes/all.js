@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   selectBoardAll,
+  selectEdgeAll,
   selectNodeAll,
   selectNodeTypeAll,
 } from '../selectors';
@@ -13,6 +14,7 @@ router.get('/', async (req, res) => {
     board: await selectBoardAll(models),
     node: await selectNodeAll(models),
     nodeType: await selectNodeTypeAll(models),
+    edge: await selectEdgeAll(models),
   };
 
   return res.send(result);

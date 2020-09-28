@@ -1,5 +1,6 @@
 import {
   selectBoard,
+  selectEdge,
   selectNode,
   selectNodeType,
 } from '../selectors';
@@ -33,25 +34,25 @@ export default async (models) => {
     },
   );
 
-  await selectNode(models).create({
+  const n1 = await selectNode(models).create({
+    nodeName: 'n1',
+    display: 'First node',
+    nodeTypeId: nodeTypeBasic.id,
+    boardId: b1.id,
+  });
+
+  const n2 = await selectNode(models).create({
     nodeName: 'n2',
     display: 'Second node',
     nodeTypeId: nodeTypeBasic.id,
     boardId: b1.id,
   });
-  // await models.get('User').create(
-  //   {
-  //     username: 'rwieruch',
-  //     messages: [
-  //       {
-  //         text: 'Published the Road to learn React',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     include: [models.get('Message')],
-  //   },
-  // );
+
+  await selectEdge(models).create({
+    boardId: b1.id,
+    fromNodeId: n1.id,
+    toNodeId: n2.id,
+  });
 
   console.log('\n===Seeding complete!===');
 };

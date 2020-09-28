@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { selectNode } from '../selectors';
+import { selectEdge, selectNode } from '../selectors';
 
 const board = (sequelize) => {
   const Board = sequelize.define('board', {
@@ -26,6 +26,7 @@ const board = (sequelize) => {
 
   Board.associate = (models) => {
     Board.hasMany(selectNode(models));
+    Board.hasMany(selectEdge(models));
   };
   return Board;
 };
