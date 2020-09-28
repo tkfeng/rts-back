@@ -9,7 +9,7 @@ const nodeType = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    nodeTypeName: {
+    name: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
@@ -17,9 +17,7 @@ const nodeType = (sequelize) => {
         notEmpty: true,
       },
     },
-    description: {
-      type: DataTypes.STRING,
-    },
+    description: DataTypes.STRING,
   }, {
     timestamps: false,
   });

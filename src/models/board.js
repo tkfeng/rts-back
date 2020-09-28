@@ -9,17 +9,8 @@ const board = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    boardName: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    display: {
-      type: DataTypes.STRING,
-    },
+    name: DataTypes.STRING,
+    display: DataTypes.STRING,
   }, {
     timestamps: false,
   });

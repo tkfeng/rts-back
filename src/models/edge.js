@@ -9,6 +9,7 @@ const edge = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
+    name: DataTypes.STRING,
   }, {
     timestamps: false,
   });
