@@ -13,7 +13,10 @@ const board = (sequelize, DataTypes) => {
     display: {
       type: DataTypes.STRING,
     },
-  }, { underscored: true });
+  }, {
+    underscored: true,
+    timestamps: false,
+  });
 
   Board.associate = (models) => {
     Board.hasMany(selectNode(models));

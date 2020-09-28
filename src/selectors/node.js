@@ -1,7 +1,12 @@
+import { selectBoard } from './board';
+import { selectNodeType } from './nodeType';
+
 export const selectNode = (models) => models.get('Node');
 
 export const selectNodeAll = async (models) => {
-  const result = await selectNode(models).findAll();
+  const result = await selectNode(models).findAll({
+    include: [selectBoard(models), selectNodeType(models)],
+  });
   return result;
 };
 
