@@ -5,7 +5,7 @@ import {
 } from '../selectors';
 
 export default async (models) => {
-  await selectBoard(models).create(
+  const b1 = await selectBoard(models).create(
     {
       boardName: 'b1',
       display: 'First ever Reach The Sheep board.',
@@ -19,7 +19,7 @@ export default async (models) => {
     },
   );
 
-  await selectNodeType(models).create(
+  const nodeTypeBasic = await selectNodeType(models).create(
     {
       nodeTypeName: 'BASIC',
       description: 'Basic node type, the user lands there and nothing happens.',
@@ -36,8 +36,8 @@ export default async (models) => {
   await selectNode(models).create({
     nodeName: 'n2',
     display: 'Second node',
-    nodeTypeId: 1,
-    boardId: 1,
+    nodeTypeId: nodeTypeBasic.id,
+    boardId: b1.id,
   });
   // await models.get('User').create(
   //   {

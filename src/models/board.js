@@ -3,7 +3,12 @@ import { selectNode } from '../selectors';
 
 const board = (sequelize) => {
   const Board = sequelize.define('board', {
-    // UUID board and nodetypes and update foriegn key to boardName
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     boardName: {
       type: DataTypes.STRING,
       unique: true,

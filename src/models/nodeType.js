@@ -3,6 +3,12 @@ import { selectNode } from '../selectors';
 
 const nodeType = (sequelize) => {
   const NodeType = sequelize.define('node_type', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     nodeTypeName: {
       type: DataTypes.STRING,
       unique: true,
