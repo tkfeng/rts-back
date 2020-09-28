@@ -2,7 +2,7 @@ import { selectNode } from '../selectors';
 
 const board = (sequelize, DataTypes) => {
   const Board = sequelize.define('board', {
-    board_name: {
+    boardName: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
@@ -14,7 +14,6 @@ const board = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   }, {
-    underscored: true,
     timestamps: false,
   });
 

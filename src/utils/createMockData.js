@@ -7,37 +7,37 @@ import {
 export default async (models) => {
   await selectBoard(models).create(
     {
-      board_name: 'b1',
+      boardName: 'b1',
       display: 'First ever Reach The Sheep board.',
     },
   );
 
   await selectBoard(models).create(
     {
-      board_name: 'b2',
+      boardName: 'b2',
       display: 'Second Reach The Sheep board.',
     },
   );
 
   await selectNodeType(models).create(
     {
-      node_type_name: 'BASIC',
+      nodeTypeName: 'BASIC',
       description: 'Basic node type, the user lands there and nothing happens.',
     },
   );
 
   await selectNodeType(models).create(
     {
-      node_type_name: 'ROLL',
+      nodeTypeName: 'ROLL',
       description: 'When user lands there, roll again.',
     },
   );
 
   await selectNode(models).create({
-    node_name: 'n2',
+    nodeName: 'n2',
     display: 'Second node',
-    node_type_id: 1,
-    board_id: 1,
+    nodeTypeId: 1,
+    boardId: 1,
   });
   // await models.get('User').create(
   //   {

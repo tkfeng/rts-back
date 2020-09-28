@@ -2,7 +2,7 @@ import { selectNode } from '../selectors';
 
 const nodeType = (sequelize, DataTypes) => {
   const NodeType = sequelize.define('node_type', {
-    node_type_name: {
+    nodeTypeName: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
@@ -14,7 +14,6 @@ const nodeType = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   }, {
-    underscored: true,
     timestamps: false,
   });
 
