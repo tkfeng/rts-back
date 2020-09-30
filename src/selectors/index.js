@@ -20,4 +20,5 @@ export {
   selectNodeType,
   selectNodeTypeAll,
   selectNodeTypeById,
+  selectNodeTypeByName,
 } from './nodeType';

@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import { selectNode } from '../selectors';
 
 const nodeType = (sequelize) => {
-  const NodeType = sequelize.define('node_type', {
+  const NodeType = sequelize.define('nodeType', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,

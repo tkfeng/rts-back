@@ -1,0 +1,22 @@
+{
+  "name": "board1",
+  "display": "First board created from json.",
+  "node": ["n1", "n2", "n3"],
+  "graph": {
+    "n1": {
+      "name": "n1",
+      "type": "START",
+      "to": ["n2"]
+    },
+    "n2": {
+      "name": "n2",
+      "type": "BASIC",
+      "to": ["n3"]
+    },
+    "n3": {
+      "name": "n3",
+      "type": "END",
+      "to": null
+    }
+  }
+}
