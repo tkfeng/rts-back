@@ -14,6 +14,7 @@ export {
   selectNode,
   selectNodeAll,
   selectNodeById,
+  selectNodeByName,
 } from './node';
 
 export {

@@ -1,4 +1,11 @@
-import { selectBoard, selectNode, selectNodeTypeByName } from '../selectors';
+import {
+  selectBoard,
+  selectEdge,
+  selectNode,
+  selectNodeByName,
+  selectNodeTypeByName,
+} from '../selectors';
+
 import boardInput from '../../data/board.json';
 
 const createBoard = async (models, input) => {
@@ -14,55 +21,60 @@ const createBoard = async (models, input) => {
   return result;
 };
 
-const createNode = async (models, graphDict, boardId) => (
-  [...graphDict.values()].map(async (node) => {
+const createNode = async (models, graphDict, boardId) => {
+  const result = [];
+  const graphValuesArray = [...graphDict.values()];
+  console.log({ graphValuesArray });
+  await Promise.all(graphValuesArray.map(async (node) => {
     const {
       name,
       type,
     } = node;
     const nodeType = await selectNodeTypeByName(models, type);
-    // console.log({ nodeType });
-    return selectNode(models).create({
+    result.push(await selectNode(models).create({
       name,
       nodeTypeId: nodeType.id,
       boardId,
-    });
-  })
-);
+    }));
+  }));
 
-/**
- * @param input: input object imported from json file.
- * {
- *  name: 'board1',
- *  display: 'First board created from json.',
- *  graph: {
- *    n1: { name: 'n1', type: 'START', to: ['n2'] },
- *    n2: { name: 'n2', type: 'BASIC', to: ['n3'] },
- *    n3: { name: 'n3', type: 'END', to: null },
- *  }
- * }
- * @returns {board, node, edge } Each value represents a sequelized model instance.
- * {
- *  board: Board
- *  node: new Map([
- *    ['n1', { name: 'n1', nodeTypeId: ref(START), boardId: ref(board1)}],
- *    ['n2', { name: 'n2', nodeTypeId: ref(BASIC), boardId: ref(board1)}],
- *    ['n3', { name: 'n3', nodeTypeId: ref(END), boardId: ref(board1)}]
- *  ]),
- *  edge: new Map([
- *    ['e1', { name: 'e1', fromNodeId: ref(n1), toNodeId: ref(n2)}, ref(board1)],
- *    ['e2', { name: 'e2', fromNodeId: ref(n2), toNodeId: ref(n3)}, ref(board1)],
- *  ]),
- * }
- */
+  return result;
+};
+
+const createEdge = async (models, graphDict, boardId) => {
+  const result = [];
+  const graphValuesArray = [...graphDict.values()];
+  // console.log({ graphValuesArray });
+  await Promise.all(graphValuesArray.map(async (node) => {
+    const {
+      name: fromNodeName,
+      to: toNodeNames,
+    } = node;
+    const { id: fromNodeId } = await selectNodeByName(models, fromNodeName);
+    await Promise.all(toNodeNames.map(async (toNodeName) => {
+      const { id: toNodeId } = await selectNodeByName(models, toNodeName);
+      const edge = await selectEdge(models).create({
+        name: `${fromNodeName}->${toNodeName}`,
+        fromNodeId,
+        toNodeId,
+        boardId,
+      });
+      result.push(edge);
+    }));
+  }));
+  return result;
+};
+
 const createBoardData = async (models, input) => {
   const board = await createBoard(models, input);
   const graphDict = new Map(Object.entries(input.graph));
   const node = await createNode(models, graphDict, board.id);
+  const edge = await createEdge(models, graphDict, board.id);
 
   return {
     board,
     node,
+    edge,
   };
 };
 

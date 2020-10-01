@@ -16,7 +16,7 @@
     "n3": {
       "name": "n3",
       "type": "END",
-      "to": null
+      "to": []
     }
   }
 }

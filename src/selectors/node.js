@@ -14,3 +14,10 @@ export const selectNodeById = async (models, id) => {
   const result = await selectNode(models).findByPk(id);
   return result;
 };
+
+export const selectNodeByName = async (models, name) => {
+  const result = await selectNode(models).findOne({
+    where: { name },
+  });
+  return result;
+};
