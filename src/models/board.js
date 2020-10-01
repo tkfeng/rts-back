@@ -16,8 +16,8 @@ const board = (sequelize) => {
   });
 
   Board.associate = (models) => {
-    Board.hasMany(selectNode(models));
-    Board.hasMany(selectEdge(models));
+    Board.hasMany(selectNode(models), { onDelete: 'CASCADE' });
+    Board.hasMany(selectEdge(models), { onDelete: 'CASCADE' });
   };
   return Board;
 };
