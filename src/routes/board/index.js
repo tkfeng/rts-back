@@ -1,11 +1,8 @@
 import { Router } from 'express';
 import {
   selectBoardAll,
-  selectBoardById,
-  selectEdgeByBoardId,
-  selectNodeByBoardId,
-  selectNodeType,
 } from '../../selectors';
+import getBoardByBoardId from './getBoardByBoardId';
 
 const router = Router();
 
@@ -18,20 +15,6 @@ router.get('/', async (req, res) => {
   return res.send(result);
 });
 
-router.get('/:boardId', async (req, res) => {
-  const { models } = req.context;
-  const { boardId } = req.params;
-  const board = await selectBoardById(
-    models,
-    boardId,
-  );
-  const node = await selectNodeByBoardId(models, boardId, [selectNodeType(models)]);
-  const edge = await selectEdgeByBoardId(models, boardId);
-  return res.send({
-    ...board.dataValues,
-    node,
-    edge,
-  });
-});
+router.get('/:boardId', getBoardByBoardId);
 
 export default router;
