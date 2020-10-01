@@ -1,7 +1,9 @@
 export const selectNode = (models) => models.get('Node');
 
-export const selectNodeAll = async (models) => {
-  const result = await selectNode(models).findAll();
+export const selectNodeAll = async (models, include = []) => {
+  const result = await selectNode(models).findAll({
+    include,
+  });
   return result;
 };
 
@@ -18,14 +20,15 @@ export const selectNodeByBoardId = async (models, boardId, include = []) => {
   return result;
 };
 
-export const selectNodeById = async (models, id) => {
-  const result = await selectNode(models).findByPk(id);
+export const selectNodeById = async (models, id, include = []) => {
+  const result = await selectNode(models).findByPk(id, { include });
   return result;
 };
 
-export const selectNodeByName = async (models, name) => {
+export const selectNodeByName = async (models, name, include = []) => {
   const result = await selectNode(models).findOne({
     where: { name },
+    include,
   });
   return result;
 };
