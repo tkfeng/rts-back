@@ -21,11 +21,9 @@ const createBoard = async (models, input) => {
   return result;
 };
 
-const createNode = async (models, graphDict, boardId) => {
+const createNode = async (models, connections, boardId) => {
   const result = [];
-  const graphValuesArray = [...graphDict.values()];
-  console.log({ graphValuesArray });
-  await Promise.all(graphValuesArray.map(async (node) => {
+  await Promise.all(connections.map(async (node) => {
     const {
       name,
       type,
@@ -41,11 +39,9 @@ const createNode = async (models, graphDict, boardId) => {
   return result;
 };
 
-const createEdge = async (models, graphDict, boardId) => {
+const createEdge = async (models, connections, boardId) => {
   const result = [];
-  const graphValuesArray = [...graphDict.values()];
-  // console.log({ graphValuesArray });
-  await Promise.all(graphValuesArray.map(async (node) => {
+  await Promise.all(connections.map(async (node) => {
     const {
       name: fromNodeName,
       to: toNodeNames,
@@ -67,9 +63,9 @@ const createEdge = async (models, graphDict, boardId) => {
 
 const createBoardData = async (models, input) => {
   const board = await createBoard(models, input);
-  const graphDict = new Map(Object.entries(input.graph));
-  const node = await createNode(models, graphDict, board.id);
-  const edge = await createEdge(models, graphDict, board.id);
+  const connections = Object.values(input.graph);
+  const node = await createNode(models, connections, board.id);
+  const edge = await createEdge(models, connections, board.id);
 
   return {
     board,
