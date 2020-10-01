@@ -7,12 +7,14 @@ export {
 export {
   selectEdge,
   selectEdgeAll,
+  selectEdgeByBoardId,
   selectEdgeById,
 } from './edge';
 
 export {
   selectNode,
   selectNodeAll,
+  selectNodeByBoardId,
   selectNodeById,
   selectNodeByName,
 } from './node';

@@ -2,6 +2,9 @@ import { Router } from 'express';
 import {
   selectBoardAll,
   selectBoardById,
+  selectEdgeByBoardId,
+  selectNodeByBoardId,
+  selectNodeType,
 } from '../../selectors';
 
 const router = Router();
@@ -16,11 +19,19 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:boardId', async (req, res) => {
-  const result = await selectBoardById(
-    req.context.models,
-    req.params.boardId,
+  const { models } = req.context;
+  const { boardId } = req.params;
+  const board = await selectBoardById(
+    models,
+    boardId,
   );
-  return res.send(result);
+  const node = await selectNodeByBoardId(models, boardId, [selectNodeType(models)]);
+  const edge = await selectEdgeByBoardId(models, boardId);
+  return res.send({
+    ...board.dataValues,
+    node,
+    edge,
+  });
 });
 
 export default router;
