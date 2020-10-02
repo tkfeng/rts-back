@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  selectBoard,
   selectBoardAll,
 } from '../../selectors';
 import getBoardByBoardId from './getBoardByBoardId';
@@ -16,5 +17,16 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:boardId', getBoardByBoardId);
+
+router.post('/', async (req, res) => {
+  const { models } = req.context;
+  const { name, display } = req.body;
+  const board = await selectBoard(models).create({
+    name,
+    display,
+  });
+
+  return res.send(board);
+});
 
 export default router;
