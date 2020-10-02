@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import logger from 'morgan';
 import routes from './routes';
 import models, { sequelize } from './models';
 import createMockData from './utils/createMockData';
@@ -11,7 +12,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(logger('dev'));
 app.get('/', (req, res) => res.send('Received a GET HTTP method'));
 
 app.use(async (req, res, next) => {
