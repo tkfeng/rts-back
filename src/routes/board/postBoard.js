@@ -4,11 +4,9 @@ import {
   selectNode,
   selectNodeByName,
   selectNodeTypeByName,
-} from '../selectors';
+} from '../../selectors';
 
-import boardInput from '../../data/board.json';
-
-const createBoard = async (models, input) => {
+const createBoardMeta = async (models, input) => {
   const {
     name,
     display,
@@ -61,19 +59,25 @@ const createEdge = async (models, connections, boardId) => {
   return result;
 };
 
-const createBoardData = async (models, input) => {
-  const board = await createBoard(models, input);
+const createNodeAndEdge = async (models, connections, boardId) => {
+  await createNode(models, connections, boardId);
+  await createEdge(models, connections, boardId);
+};
+
+export const createBoard = async (models, input) => {
+  const board = await createBoardMeta(models, input);
   const connections = Object.values(input.node);
-  const node = await createNode(models, connections, board.id);
-  const edge = await createEdge(models, connections, board.id);
+  // Asynchronously createNodeAndEdge  without waiting.
+  createNodeAndEdge(models, connections, board.id);
 
   return {
     board,
-    node,
-    edge,
   };
 };
 
-export default async (models) => {
-  await createBoardData(models, boardInput);
+const postBoard = async (req, res) => {
+  const result = await createBoard(req.context.models, req.body);
+  return res.send(result);
 };
+
+export default postBoard;
