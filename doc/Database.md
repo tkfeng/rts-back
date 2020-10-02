@@ -1,18 +1,18 @@
 # RTS Database Design
 
-### Schema
+## Schema
 
-#### Board
-##### Fields
+### Board
+#### Fields
 - board_name: unique, text
 - display: text
 
-#### NodeType Schema
-##### Fields
+### NodeType Schema
+#### Fields
 - node_type_name: unique, text
 - description: text
 
-##### All Types
+#### All Types
 ```
 {
   node_type_name: "BASIC",
@@ -29,16 +29,16 @@
 }
 ```
 
-#### Node
+### Node
 Represent an instance of nodetype
 
-##### Fields
+#### Fields
 - node_name: unique, text
 - display: text
 - node_type_name: FK - TileType
 - board_name: FK - Board
 
-##### Example
+#### Example
 ```
 {
   node_name: "rabbit-basic-b1",
@@ -57,16 +57,16 @@ Represent an instance of nodetype
   board-name: "b2",
 }
 ```
-#### Edge
+### Edge
 Represent a directed path from from_node to to_node
 
-##### Fields
+#### Fields
 - edge_name: unique, text
 - from_node: FK - Node
 - to_node: FK - Node
 - board_name: FK - Board
 
-##### Example
+#### Example
 ```
 {
   edge_name: "uuid1",

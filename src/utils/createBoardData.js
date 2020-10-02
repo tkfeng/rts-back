@@ -63,7 +63,7 @@ const createEdge = async (models, connections, boardId) => {
 
 const createBoardData = async (models, input) => {
   const board = await createBoard(models, input);
-  const connections = Object.values(input.graph);
+  const connections = Object.values(input.node);
   const node = await createNode(models, connections, board.id);
   const edge = await createEdge(models, connections, board.id);
 
