@@ -7,7 +7,7 @@
     "start": "nodemon --exec babel-node src/index.js",
     "lint": "eslint 'src/**/*.js' --fix",
     "clean": "rimraf ./node_modules",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "TK Feng <tk.feng@gmail.com>",
@@ -19,7 +19,8 @@
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "jest": "^26.4.2"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -29,5 +30,10 @@
     "pg": "^8.3.3",
     "sequelize": "^6.3.5",
     "uuid": "^8.3.0"
+  },
+  "jest": {
+    "rootDir": "src",
+    "collectCoverage": true,
+    "coverageReporters": ["html"]
   }
 }
