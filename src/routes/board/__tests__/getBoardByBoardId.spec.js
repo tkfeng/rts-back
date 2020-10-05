@@ -1,5 +1,5 @@
 import SequelizeMock from 'sequelize-mock';
-import { retrieveBoardByBoardId } from '../getBoardByBoardId';
+import { boardByBoardId } from '../getBoardByBoardId';
 
 const createMock = () => {
   const dbMock = new SequelizeMock();
@@ -34,7 +34,7 @@ describe('retrieveBoardByBoardId', () => {
     models.get('Node').$queueResult(models.get('Node').bulkCreate(nodeMock));
     models.get('Edge').$queueResult(models.get('Edge').bulkCreate(edgeMock));
 
-    const result = await retrieveBoardByBoardId(models, 1);
+    const result = await boardByBoardId(models, 1);
 
     // Assert
     const {

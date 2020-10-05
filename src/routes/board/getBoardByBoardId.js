@@ -6,7 +6,7 @@ import {
 } from '../../selectors';
 import { UnprocessableEntityError } from '../../errors';
 
-export const retrieveBoardByBoardId = async (models, boardId) => {
+export const boardByBoardId = async (models, boardId) => {
   const board = await selectBoardById(
     models,
     boardId,
@@ -27,7 +27,7 @@ export const retrieveBoardByBoardId = async (models, boardId) => {
 };
 
 const getBoardByBoardId = async (req, res, next) => {
-  const result = await retrieveBoardByBoardId(
+  const result = await boardByBoardId(
     req.context.models,
     req.params.boardId,
   ).catch((error) => next(new UnprocessableEntityError(error)));
