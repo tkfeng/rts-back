@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import logger from 'morgan';
 import routes from './routes';
+import boardRoute from './api/module/board/board.route';
 import models, { sequelize } from './models';
 import createMockData from './utils/createMockData';
 
@@ -23,7 +24,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use('/all', routes.all);
-app.use('/boards', routes.board);
+app.use('/boards', boardRoute);
 
 app.get('*', (req, res, next) => {
   const error = new Error(
