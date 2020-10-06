@@ -2,9 +2,8 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import logger from 'morgan';
-import routes from './routes';
-import boardRoute from './api/module/board/board.route';
-import models, { sequelize } from './models';
+import routes from './api/module/routes';
+import models, { sequelize } from './api/module/models';
 import createMockData from './utils/createMockData';
 
 const app = express();
@@ -24,7 +23,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use('/all', routes.all);
-app.use('/boards', boardRoute);
+app.use('/boards', routes.board);
 
 app.get('*', (req, res, next) => {
   const error = new Error(

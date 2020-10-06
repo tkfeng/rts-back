@@ -1,10 +1,8 @@
-import {
-  selectNodeType,
-} from '../selectors';
+import { selectNodeType } from '../api/module/board/nodeType/nodeType.selector';
+import { createBoard } from '../api/module/board/board.controller';
 
 import nodeTypeInput from '../../data/nodeType.json';
 import boardInput from '../../data/board.json';
-import { createBoard } from '../routes/board/postBoard';
 
 export default async (models) => {
   await Promise.all(nodeTypeInput.map(async (nodeType) => {

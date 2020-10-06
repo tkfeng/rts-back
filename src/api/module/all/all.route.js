@@ -1,10 +1,8 @@
 import { Router } from 'express';
-import {
-  selectBoardAll,
-  selectEdgeAll,
-  selectNodeAll,
-  selectNodeTypeAll,
-} from '../selectors';
+import { selectBoardAll } from '../board/board.selector';
+import { selectEdgeAll } from '../board/edge/edge.selector';
+import { selectNodeAll } from '../board/node/node.selector';
+import { selectNodeTypeAll } from '../board/nodeType/nodeType.selector';
 
 const router = Router();
 

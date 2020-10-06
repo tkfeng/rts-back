@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize';
-import board from './board';
-import nodeType from './nodeType';
-import node from './node';
-import edge from './edge';
+import board from './board/board.model';
+import nodeType from './board/nodeType/nodeType.model';
+import node from './board/node/node.model';
+import edge from './board/edge/edge.model';
 
 const sequelize = new Sequelize(
   process.env.DATABASE,

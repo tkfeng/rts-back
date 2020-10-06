@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
-import { selectBoard, selectNodeType } from '../selectors';
+import { selectBoard } from '../board.selector';
+import { selectNodeType } from '../nodeType/nodeType.selector';
 
 const node = (sequelize) => {
   const Node = sequelize.define('node', {
