@@ -1,5 +1,5 @@
 import SequelizeMock from 'sequelize-mock';
-import { readBoardByBoardId } from '../board.controller';
+import { readBoardByBoardId } from '../board.service';
 
 const createMock = () => {
   const dbMock = new SequelizeMock();
