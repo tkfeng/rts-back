@@ -1,5 +1,5 @@
 import { selectNodeType } from '../api/module/board/nodeType/nodeType.selector';
-import { createBoard } from '../api/module/board/board.controller';
+import { createBoard } from '../api/module/board/board.service';
 
 import nodeTypeInput from '../../data/nodeType.json';
 import boardInput from '../../data/board.json';

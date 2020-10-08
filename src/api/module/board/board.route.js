@@ -1,20 +1,9 @@
 import { Router } from 'express';
-import {
-  selectBoardAll,
-} from './board.selector';
-import { getBoardByBoardId, postBoard } from './board.controller';
+import { getBoardByBoardId, postBoard, getBoards } from './board.controller';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
-  const { models } = req.context;
-  const result = {
-    board: await selectBoardAll(models),
-  };
-
-  return res.send(result);
-});
-
+router.get('/', getBoards);
 router.get('/:boardId', getBoardByBoardId);
 
 router.post('/', postBoard);
