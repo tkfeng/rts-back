@@ -61,3 +61,9 @@ export const readBoards = async (models) => {
   };
   return result;
 };
+
+export const destroyBoard = async (models, id) => {
+  await selectBoard(models).destroy({
+    where: { id },
+  });
+};
