@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
-import { selectEdge, selectNode } from '../selectors';
+import { selectEdge } from './edge/edge.selector';
+import { selectNode } from './node/node.selector';
 
 const board = (sequelize) => {
   const Board = sequelize.define('board', {
